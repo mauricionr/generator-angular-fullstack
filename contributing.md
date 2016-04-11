@@ -10,6 +10,12 @@ Additionally for this generator:
 * When submitting a bugfix, write a test that exposes the bug and fails before applying your fix. Submit the test alongside the fix.
 * When submitting a new feature, add tests that cover the feature.
 
+To run the generator:
+1. Clone it and `cd` to its root
+2. `npm install`
+3. `npm link` (tells NPM to look to your own version)
+4. `yo angular-fullstack` as normal. It should run from your cloned version rather than the one downloaded from NPM.
+
 ## Git Commit Guidelines
 
 These rules are adopted from the AngularJS project.
@@ -64,3 +70,23 @@ reference GitHub issues that this commit **Closes**.
 A detailed explanation can be found in this [document][commit-message-format].
 
 [commit-message-format]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y
+
+# Releasing
+*(for contributors with push access)*
+
+The `grunt release` task will do most of the work for you, see [`grunt-release`](https://github.com/geddski/grunt-release#using-grunt-release) for valid release targets.
+
+* Run the release task `grunt release:RELEASE_TARGET`.
+
+* Push and publish the `angular-fullstack-deps` submodule.
+```bash
+$ cd angular-fullstack-deps
+$ git push && npm publish
+$ cd ..
+```
+
+* Push and publish `generator-angular-fullstack`.
+```bash
+$ git push && git push --tags
+$ npm publish
+```
